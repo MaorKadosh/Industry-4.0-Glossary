@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0b1420;
+  --muted: #64748b;
+  --surface: rgba(255, 255, 255, 0.76);
+  --line: rgba(15, 23, 42, 0.09);
+  --violet: #6d5dfc;
+  --cyan: #10b8c7;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 85% -10%, rgba(109, 93, 252, 0.18), transparent 31rem),
+    radial-gradient(circle at -5% 28%, rgba(16, 184, 199, 0.13), transparent 27rem),
+    #f6f8fc;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+
+::selection { color: white; background: var(--violet); }
+
+.glass {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow: 0 18px 60px rgba(30, 41, 59, 0.08);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.glass-dark {
+  background: linear-gradient(135deg, rgba(18, 25, 41, 0.94), rgba(28, 32, 61, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 80px rgba(30, 41, 59, 0.2);
+  backdrop-filter: blur(22px);
+}
+
+.gradient-text {
+  color: transparent;
+  background: linear-gradient(110deg, #5f4ef5, #0da9b8);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.mesh::before, .mesh::after {
+  position: fixed;
+  z-index: -1;
+  width: 18rem;
+  height: 18rem;
+  content: "";
+  border-radius: 999px;
+  filter: blur(80px);
+  opacity: 0.2;
+  pointer-events: none;
+}
+.mesh::before { top: 25%; right: -8rem; background: #806cff; }
+.mesh::after { bottom: 10%; left: -8rem; background: #25c8cc; }
+
+.term-card { transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease; }
+.term-card:hover { transform: translateY(-5px); border-color: rgba(109, 93, 252, 0.24); box-shadow: 0 22px 55px rgba(57, 51, 115, 0.12); }
+
+.fade-in { animation: fade-in 480ms ease both; }
+.slide-up { animation: slide-up 520ms cubic-bezier(.22, .8, .3, 1) both; }
+.pulse-soft { animation: pulse-soft 2.8s ease-in-out infinite; }
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slide-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse-soft { 0%, 100% { box-shadow: 0 0 0 0 rgba(109, 93, 252, 0.22); } 50% { box-shadow: 0 0 0 10px rgba(109, 93, 252, 0); } }
+
+.modal-backdrop { animation: fade-in 180ms ease both; }
+.modal-panel { animation: slide-up 260ms cubic-bezier(.22, .8, .3, 1) both; }
+
+.focus-ring:focus-visible { outline: 3px solid rgba(109, 93, 252, 0.28); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
