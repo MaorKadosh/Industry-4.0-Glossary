@@ -2,6 +2,24 @@
 
 All notable changes to this project are documented in this file. The format follows Keep a Changelog, and the project uses Semantic Versioning.
 
+## [1.1.0] - 2026-07-15
+
+### Added
+
+- Admin role assignment through the administration dashboard.
+- Protection against demoting the currently signed-in Admin through the UI.
+- Installable Progressive Web App manifest and desktop or home-screen icons.
+- Native installation prompt with fallback instructions for unsupported browsers.
+- Persistent user-selectable dark mode on authenticated and authentication screens.
+- Application footer credit.
+- Incremental Supabase migration for role audit bootstrapping.
+
+### Changed
+
+- Registration success messaging now reflects immediate access without email confirmation.
+- Role audit formatting now supports Viewer, Editor, and Admin assignments.
+- Supabase role audit trigger now handles SQL Editor bootstrapping safely.
+
 ## [1.0.0] - 2026-07-15
 
 ### Added

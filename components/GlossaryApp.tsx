@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ArrowDownAZ, BookOpenText, BookPlus, ChevronLeft, Clock3, LogOut, Menu, Pencil, Search, Sparkles, Trash2, UsersRound, X } from "lucide-react";
+import { ArrowDownAZ, BookOpenText, BookPlus, ChevronLeft, Clock3, LogOut, Menu, Moon, Pencil, Search, Sparkles, Sun, Trash2, UsersRound, X } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase, isSupabaseConfigured } from "@/lib/supabaseClient";
 import { demoLogs, demoProfile, demoTerms, demoUsers } from "@/lib/demoData";
@@ -10,6 +10,7 @@ import { AdminDashboard } from "./AdminDashboard";
 import { ConfirmDialog } from "./ConfirmDialog";
 import { LoginPanel } from "./LoginPanel";
 import { TermModal } from "./TermModal";
+import { InstallAppButton } from "./InstallAppButton";
 
 type SortMode = "alphabetical" | "newest" | "oldest";
 
@@ -27,6 +28,7 @@ export function GlossaryApp() {
   const [deletingTerm, setDeletingTerm] = useState<Term | null>(null);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [notice, setNotice] = useState("");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const loadData = useCallback(async (userId: string) => {
     if (!supabase) return;
@@ -46,6 +48,11 @@ export function GlossaryApp() {
     const { data } = supabase.auth.onAuthStateChange((_event, nextSession) => { setSession(nextSession); if (nextSession) loadData(nextSession.user.id); else setProfile(null); });
     return () => data.subscription.unsubscribe();
   }, [loadData]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setTheme(document.documentElement.classList.contains("dark") ? "dark" : "light"), 0);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (activeView !== "admin" || profile?.role !== "admin" || !supabase) return;
@@ -94,7 +101,8 @@ export function GlossaryApp() {
     showNotice("המושג נמחק מהמילון.");
   }
 
-  async function changeRole(user: Profile, role: Exclude<UserRole, "admin">) {
+  async function changeRole(user: Profile, role: UserRole) {
+    if (role === "admin" && !window.confirm(`להעניק ל־${user.name} הרשאת מנהל מערכת מלאה?`)) return;
     if (supabase) {
       const { error } = await supabase.from("users").update({ role }).eq("id", user.id);
       if (error) { showNotice("עדכון ההרשאה נכשל."); return; }
@@ -104,14 +112,22 @@ export function GlossaryApp() {
     showNotice("ההרשאה עודכנה.");
   }
 
+  function toggleTheme() {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    document.documentElement.classList.toggle("dark", nextTheme === "dark");
+    window.localStorage.setItem("glossary-theme", nextTheme);
+  }
+
   if (isSupabaseConfigured && !loading && !session) return <LoginPanel />;
   if (loading || !profile) return <LoadingScreen />;
 
   return (
-    <main className="mesh min-h-screen">
-      <Header profile={profile} mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} activeView={activeView} setActiveView={setActiveView} onLogout={() => supabase?.auth.signOut()} />
+    <main className="mesh flex min-h-screen flex-col">
+      <Header profile={profile} theme={theme} onToggleTheme={toggleTheme} mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} activeView={activeView} setActiveView={setActiveView} onLogout={() => supabase?.auth.signOut()} />
       {!isSupabaseConfigured && <div className="mx-auto mt-4 max-w-7xl px-4 sm:px-6 lg:px-8"><div className="flex items-center gap-2 rounded-2xl border border-violet-200 bg-violet-50/80 px-4 py-3 text-sm font-semibold text-violet-700"><Sparkles size={17} className="shrink-0" /><span>מצב הדגמה פעיל — כל היכולות זמינות לבדיקה, והשינויים נשמרים עד לרענון העמוד.</span></div></div>}
-      {activeView === "admin" && profile.role === "admin" ? <AdminDashboard users={users} logs={logs} onBack={() => setActiveView("glossary")} onRoleChange={changeRole} /> : <GlossaryView terms={filteredTerms} total={terms.length} query={query} setQuery={setQuery} sort={sort} setSort={setSort} canEdit={canEdit} setEditingTerm={setEditingTerm} setDeletingTerm={setDeletingTerm} />}
+      <div className="flex-1">{activeView === "admin" && profile.role === "admin" ? <AdminDashboard users={users} logs={logs} currentUserId={profile.id} onBack={() => setActiveView("glossary")} onRoleChange={changeRole} /> : <GlossaryView terms={filteredTerms} total={terms.length} query={query} setQuery={setQuery} sort={sort} setSort={setSort} canEdit={canEdit} setEditingTerm={setEditingTerm} setDeletingTerm={setDeletingTerm} />}</div>
+      <footer className="border-t border-slate-200/70 bg-white/40 px-4 py-5 text-center text-sm font-semibold text-slate-500 backdrop-blur-xl">© 2026 מתן סויסה</footer>
       {canEdit && activeView === "glossary" && <button onClick={() => setEditingTerm(null)} className="focus-ring pulse-soft fixed bottom-5 left-5 z-30 flex h-14 items-center gap-2 rounded-2xl bg-violet-600 px-5 font-bold text-white shadow-2xl shadow-violet-500/30 transition hover:-translate-y-1 hover:bg-violet-700 sm:bottom-8 sm:left-8" aria-label="הוספת מושג חדש"><BookPlus size={22} /><span className="hidden sm:inline">מושג חדש</span></button>}
       {editingTerm !== undefined && <TermModal term={editingTerm} onClose={() => setEditingTerm(undefined)} onSave={saveTerm} />}
       {deletingTerm && <ConfirmDialog termName={deletingTerm.term} onCancel={() => setDeletingTerm(null)} onConfirm={deleteTerm} />}
@@ -120,8 +136,8 @@ export function GlossaryApp() {
   );
 }
 
-function Header({ profile, mobileMenu, setMobileMenu, activeView, setActiveView, onLogout }: { profile: Profile; mobileMenu: boolean; setMobileMenu: (value: boolean) => void; activeView: "glossary" | "admin"; setActiveView: (value: "glossary" | "admin") => void; onLogout: () => void }) {
-  return <header className="sticky top-0 z-40 border-b border-white/60 bg-white/70 backdrop-blur-2xl"><div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"><button onClick={() => setActiveView("glossary")} className="focus-ring flex items-center gap-3 rounded-xl text-right"><span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-violet-600 to-cyan-500 text-white shadow-lg shadow-violet-500/20"><BookOpenText size={22} /></span><span><strong className="block leading-none">מילון 4.0</strong><small className="mt-1 block text-[10px] font-semibold text-slate-400">שרשרת אספקה חכמה</small></span></button><nav className="hidden items-center gap-2 sm:flex"><button onClick={() => setActiveView("glossary")} className={`focus-ring rounded-xl px-4 py-2 text-sm font-bold transition ${activeView === "glossary" ? "bg-slate-950 text-white" : "text-slate-500 hover:bg-slate-100"}`}>המילון</button>{profile.role === "admin" && <button onClick={() => setActiveView("admin")} className={`focus-ring rounded-xl px-4 py-2 text-sm font-bold transition ${activeView === "admin" ? "bg-slate-950 text-white" : "text-slate-500 hover:bg-slate-100"}`}>ניהול</button>}<span className="mx-2 h-7 w-px bg-slate-200" /><span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 text-sm font-black text-white">{profile.name.charAt(0)}</span><div className="text-right"><p className="text-sm font-bold leading-none">{profile.name}</p><p className="mt-1 text-[10px] text-slate-400">{profile.role === "admin" ? "מנהל מערכת" : profile.role === "editor" ? "עורך" : "צופה"}</p></div>{isSupabaseConfigured && <button onClick={onLogout} className="focus-ring ms-2 rounded-xl p-2 text-slate-400 hover:bg-slate-100 hover:text-rose-600" aria-label="יציאה מהחשבון"><LogOut size={18} /></button>}</nav><button className="focus-ring rounded-xl p-2 sm:hidden" onClick={() => setMobileMenu(!mobileMenu)} aria-label="פתיחת תפריט">{mobileMenu ? <X /> : <Menu />}</button></div>{mobileMenu && <div className="fade-in border-t border-slate-100 bg-white p-4 sm:hidden"><button onClick={() => { setActiveView("glossary"); setMobileMenu(false); }} className="w-full rounded-xl p-3 text-right font-bold">המילון</button>{profile.role === "admin" && <button onClick={() => { setActiveView("admin"); setMobileMenu(false); }} className="w-full rounded-xl p-3 text-right font-bold">ניהול המערכת</button>}{isSupabaseConfigured && <button onClick={onLogout} className="w-full rounded-xl p-3 text-right font-bold text-rose-600">יציאה מהחשבון</button>}</div>}</header>;
+function Header({ profile, theme, onToggleTheme, mobileMenu, setMobileMenu, activeView, setActiveView, onLogout }: { profile: Profile; theme: "light" | "dark"; onToggleTheme: () => void; mobileMenu: boolean; setMobileMenu: (value: boolean) => void; activeView: "glossary" | "admin"; setActiveView: (value: "glossary" | "admin") => void; onLogout: () => void }) {
+  return <header className="sticky top-0 z-40 border-b border-white/60 bg-white/70 backdrop-blur-2xl"><div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"><button onClick={() => setActiveView("glossary")} className="focus-ring flex items-center gap-3 rounded-xl text-right"><span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-violet-600 to-cyan-500 text-white shadow-lg shadow-violet-500/20"><BookOpenText size={22} /></span><span><strong className="block leading-none">מילון 4.0</strong><small className="mt-1 block text-[10px] font-semibold text-slate-400">שרשרת אספקה חכמה</small></span></button><div className="flex items-center gap-1"><nav className="hidden items-center gap-2 sm:flex"><button onClick={() => setActiveView("glossary")} className={`focus-ring rounded-xl px-4 py-2 text-sm font-bold transition ${activeView === "glossary" ? "bg-slate-950 text-white" : "text-slate-500 hover:bg-slate-100"}`}>המילון</button>{profile.role === "admin" && <button onClick={() => setActiveView("admin")} className={`focus-ring rounded-xl px-4 py-2 text-sm font-bold transition ${activeView === "admin" ? "bg-slate-950 text-white" : "text-slate-500 hover:bg-slate-100"}`}>ניהול</button>}<span className="mx-2 h-7 w-px bg-slate-200" /><span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 text-sm font-black text-white">{profile.name.charAt(0)}</span><div className="text-right"><p className="text-sm font-bold leading-none">{profile.name}</p><p className="mt-1 text-[10px] text-slate-400">{profile.role === "admin" ? "מנהל מערכת" : profile.role === "editor" ? "עורך" : "צופה"}</p></div>{isSupabaseConfigured && <button onClick={onLogout} className="focus-ring ms-2 rounded-xl p-2 text-slate-400 hover:bg-slate-100 hover:text-rose-600" aria-label="יציאה מהחשבון"><LogOut size={18} /></button>}</nav><button onClick={onToggleTheme} className="focus-ring grid h-10 w-10 place-items-center rounded-xl text-slate-500 transition hover:bg-slate-100 hover:text-violet-600" aria-label={theme === "dark" ? "מעבר למצב בהיר" : "מעבר למצב כהה"} title={theme === "dark" ? "מצב בהיר" : "מצב כהה"}>{theme === "dark" ? <Sun size={19} /> : <Moon size={19} />}</button><InstallAppButton /><button className="focus-ring grid h-10 w-10 place-items-center rounded-xl sm:hidden" onClick={() => setMobileMenu(!mobileMenu)} aria-label="פתיחת תפריט">{mobileMenu ? <X size={21} /> : <Menu size={21} />}</button></div></div>{mobileMenu && <div className="fade-in border-t border-slate-100 bg-white p-4 sm:hidden"><button onClick={() => { setActiveView("glossary"); setMobileMenu(false); }} className="w-full rounded-xl p-3 text-right font-bold">המילון</button>{profile.role === "admin" && <button onClick={() => { setActiveView("admin"); setMobileMenu(false); }} className="w-full rounded-xl p-3 text-right font-bold">ניהול המערכת</button>}{isSupabaseConfigured && <button onClick={onLogout} className="w-full rounded-xl p-3 text-right font-bold text-rose-600">יציאה מהחשבון</button>}</div>}</header>;
 }
 
 function GlossaryView({ terms, total, query, setQuery, sort, setSort, canEdit, setEditingTerm, setDeletingTerm }: { terms: Term[]; total: number; query: string; setQuery: (value: string) => void; sort: SortMode; setSort: (value: SortMode) => void; canEdit: boolean; setEditingTerm: (term: Term | null) => void; setDeletingTerm: (term: Term) => void }) {
