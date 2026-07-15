@@ -1,6 +1,6 @@
 # Industry 4.0 Glossary
 
-A mobile-first Hebrew glossary application for the Master's course "The Information Age and Industry 4.0 in Logistics and Supply Chain Management – Managers' Views" (course 55-724).
+A mobile-first Hebrew glossary application for the Master's course "The Information Age and Industry 4.0 in Logistics and Supply Chain Management - Managers' Views" (course 55-724).
 
 The application provides a searchable academic glossary, role-based editing, user administration, and an immutable audit trail. The initial demo vocabulary is based on the supplied course syllabus.
 
@@ -16,6 +16,8 @@ The application provides a searchable academic glossary, role-based editing, use
 - Admin promotion and demotion through the protected administration interface
 - Installable Progressive Web App for desktop, Android, and iOS home screens
 - User-selectable dark mode persisted on the current device
+- Native sharing to WhatsApp, SMS, email, and other installed applications
+- Centered mobile-friendly action button for adding new glossary terms
 - Local demo mode when Supabase environment variables are not configured
 - Accessible dialogs, keyboard focus states, reduced-motion support, and touch-friendly controls
 
@@ -89,6 +91,10 @@ The application is designed to support immediate sign-in after registration. In 
 ## App installation and theme
 
 Supported browsers display an install icon in the application header. It opens the native installation prompt when available and otherwise shows platform-specific instructions for adding the application to the desktop or home screen. Dark mode can be selected from the adjacent moon or sun icon and is stored locally on the device.
+
+## Sharing the application
+
+The share icon in the application header opens the device's native share sheet with a preformatted plain-text invitation and production URL. The message is compatible with WhatsApp and standard SMS clients. Browsers without native sharing support copy the complete invitation to the clipboard.
 
 ## Database security
 

@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
       apple: [{ url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" }],
     },
     appleWebApp: { capable: true, title: "מילון 4.0", statusBarStyle: "black-translucent" },
-    openGraph: { title, description, locale: "he_IL", type: "website", images: [{ url: new URL("/og.png", baseUrl).toString(), width: 1760, height: 920, alt: "מילון 4.0 — שרשרת אספקה חכמה" }] },
+    openGraph: { title, description, locale: "he_IL", type: "website", images: [{ url: new URL("/og.png", baseUrl).toString(), width: 1760, height: 920, alt: "מילון 4.0 - שרשרת אספקה חכמה" }] },
     twitter: { card: "summary_large_image", title, description, images: [new URL("/og.png", baseUrl).toString()] },
   };
 }

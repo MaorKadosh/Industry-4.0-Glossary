@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "מילון 4.0 — שרשרת אספקה חכמה",
+    name: "מילון 4.0 - שרשרת אספקה חכמה",
     short_name: "מילון 4.0",
     description: "מילון המושגים של הקורס תעשייה 4.0 וניהול שרשרת האספקה",
     start_url: "/",

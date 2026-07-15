@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented in this file. The format follows Keep a Changelog, and the project uses Semantic Versioning.
 
+## [1.1.1] - 2026-07-15
+
+### Added
+
+- Native application sharing with a WhatsApp and SMS-compatible invitation.
+- Clipboard fallback for browsers without Web Share API support.
+
+### Changed
+
+- Replaced long dash characters with standard hyphens in displayed text.
+- Enlarged and centered the new-term action button at the bottom of the viewport.
+
 ## [1.1.0] - 2026-07-15
 
 ### Added
