@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import { ArrowLeft, BookOpenText, Eye, EyeOff, LoaderCircle, LockKeyhole, Moon, Sun, UserRound } from "lucide-react";
+import Image from "next/image";
+import { ArrowLeft, Eye, EyeOff, LoaderCircle, LockKeyhole, Moon, Sun, UserRound } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 
 export function LoginPanel() {
@@ -52,7 +53,7 @@ export function LoginPanel() {
           <div className="absolute -left-16 top-14 h-56 w-56 rounded-full bg-cyan-400/20 blur-3xl" />
           <div className="absolute -bottom-12 right-10 h-64 w-64 rounded-full bg-violet-500/30 blur-3xl" />
           <div className="relative flex items-center gap-3 text-sm font-bold">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/10"><BookOpenText size={22} /></span>
+            <Image src="/icons/logo-192.png" alt="" width={44} height={44} className="h-11 w-11 rounded-2xl object-cover shadow-lg shadow-cyan-500/20" priority />
             <span>מילון 4.0</span>
           </div>
           <div className="relative">
@@ -65,7 +66,7 @@ export function LoginPanel() {
 
         <div className="p-6 sm:p-12 lg:p-14">
           <div className="mb-10 flex items-center gap-3 lg:hidden">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-violet-100 text-violet-600"><BookOpenText size={22} /></span>
+            <Image src="/icons/logo-192.png" alt="" width={44} height={44} className="h-11 w-11 rounded-2xl object-cover shadow-lg shadow-cyan-500/20" priority />
             <span className="font-black">מילון 4.0</span>
           </div>
           <p className="text-sm font-bold text-violet-600">{mode === "login" ? "טוב לראות אותך שוב" : "מצטרפים למרחב הלמידה"}</p>

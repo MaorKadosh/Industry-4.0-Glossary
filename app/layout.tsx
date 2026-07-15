@@ -17,8 +17,12 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     manifest: "/manifest.webmanifest",
     icons: {
-      icon: [{ url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" }],
-      apple: [{ url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" }],
+      icon: [
+        { url: "/icons/logo-32.png", sizes: "32x32", type: "image/png" },
+        { url: "/icons/logo-192.png", sizes: "192x192", type: "image/png" },
+      ],
+      shortcut: [{ url: "/icons/logo-32.png", sizes: "32x32", type: "image/png" }],
+      apple: [{ url: "/icons/logo-180.png", sizes: "180x180", type: "image/png" }],
     },
     appleWebApp: { capable: true, title: "מילון 4.0", statusBarStyle: "black-translucent" },
     openGraph: { title, description, locale: "he_IL", type: "website", images: [{ url: new URL("/og.png", baseUrl).toString(), width: 1760, height: 920, alt: "מילון 4.0 - שרשרת אספקה חכמה" }] },

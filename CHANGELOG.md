@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented in this file. The format follows Keep a Changelog, and the project uses Semantic Versioning.
 
+## [1.1.4] - 2026-07-15
+
+### Changed
+
+- Replaced the application logo with the supplied Industry 4.0 artwork throughout the authentication screen, main header, and loading state.
+- Added optimized 32 px, 180 px, 192 px, 512 px, and 1024 px logo assets for browser tabs, Apple devices, Android installation, and high-resolution displays.
+- Updated the manifest and application metadata to reference cache-safe logo filenames.
+- Rotated the service worker cache so existing users receive the new branding assets.
+
 ## [1.1.3] - 2026-07-15
 
 ### Fixed

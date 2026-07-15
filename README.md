@@ -15,6 +15,7 @@ The application provides a searchable academic glossary, role-based editing, use
 - Admin-only audit log with database-triggered events
 - Admin promotion and demotion through the protected administration interface
 - Installable Progressive Web App for desktop, Android, and iOS home screens
+- Custom Industry 4.0 application logo across the interface, browser tab, and installed application icons
 - User-selectable dark mode persisted on the current device
 - Native sharing to WhatsApp, SMS, email, and other installed applications
 - Centered mobile-friendly action button for adding new glossary terms

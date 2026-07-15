@@ -1,4 +1,4 @@
-const cacheName = "industry-glossary-static-v1";
+const cacheName = "industry-glossary-static-v2";
 
 self.addEventListener("install", () => {
   self.skipWaiting();

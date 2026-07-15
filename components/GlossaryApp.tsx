@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { ArrowDownAZ, BookOpenText, BookPlus, ChevronLeft, Clock3, LogOut, Menu, Moon, Pencil, Search, Sparkles, Sun, Trash2, UsersRound, X } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase, isSupabaseConfigured } from "@/lib/supabaseClient";
@@ -142,7 +143,7 @@ function Header({ profile, theme, onToggleTheme, mobileMenu, setMobileMenu, acti
     <header className="sticky top-0 z-40 border-b border-white/60 bg-white/70 backdrop-blur-2xl">
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <button onClick={() => setActiveView("glossary")} className="focus-ring flex items-center gap-3 rounded-xl text-right">
-          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-violet-600 to-cyan-500 text-white shadow-lg shadow-violet-500/20"><BookOpenText size={22} /></span>
+          <Image src="/icons/logo-192.png" alt="" width={44} height={44} className="h-11 w-11 rounded-2xl object-cover shadow-lg shadow-cyan-500/20" priority />
           <span><strong className="block leading-none">מילון 4.0</strong><small className="mt-1 block text-[10px] font-semibold text-slate-400">שרשרת אספקה חכמה</small></span>
         </button>
         <div className="flex items-center gap-1">
@@ -175,4 +176,4 @@ function GlossaryView({ terms, total, query, setQuery, sort, setSort, canEdit, s
   </section>;
 }
 
-function LoadingScreen() { return <main className="grid min-h-dvh place-items-center bg-slate-50"><div className="text-center"><span className="mx-auto grid h-14 w-14 animate-pulse place-items-center rounded-2xl bg-violet-600 text-white"><BookOpenText /></span><p className="mt-4 text-sm font-bold text-slate-500">טוענים את המילון...</p></div></main>; }
+function LoadingScreen() { return <main className="grid min-h-dvh place-items-center bg-slate-50"><div className="text-center"><Image src="/icons/logo-192.png" alt="" width={56} height={56} className="mx-auto h-14 w-14 animate-pulse rounded-2xl object-cover shadow-lg shadow-cyan-500/20" priority /><p className="mt-4 text-sm font-bold text-slate-500">טוענים את המילון...</p></div></main>; }
