@@ -45,7 +45,7 @@ export function LoginPanel() {
   }
 
   return (
-    <main className="mesh relative flex min-h-screen items-center justify-center p-4 sm:p-8">
+    <main className="mesh relative flex min-h-dvh items-center justify-center p-4 sm:p-8">
       <button onClick={toggleTheme} className="focus-ring absolute left-5 top-5 z-10 grid h-11 w-11 place-items-center rounded-2xl bg-white/80 text-slate-600 shadow-lg backdrop-blur transition hover:text-violet-600 sm:left-8 sm:top-8" aria-label={theme === "dark" ? "מעבר למצב בהיר" : "מעבר למצב כהה"}>{theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}</button>
       <section className="glass grid w-full max-w-5xl overflow-hidden rounded-[2rem] lg:grid-cols-[1.04fr_.96fr]">
         <div className="glass-dark relative hidden min-h-[650px] overflow-hidden p-12 text-white lg:flex lg:flex-col lg:justify-between">

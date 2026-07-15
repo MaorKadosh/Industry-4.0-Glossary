@@ -10,7 +10,7 @@ export function AdminDashboard({ users, logs, currentUserId, onBack, onRoleChang
   const admins = users.filter((user) => user.role === "admin").length;
 
   return (
-    <section className="fade-in mx-auto w-full max-w-7xl px-4 pb-28 pt-6 sm:px-6 lg:px-8">
+    <section className="fade-in mx-auto w-full max-w-7xl px-4 pb-10 pt-6 sm:px-6 sm:pb-14 lg:px-8">
       <button onClick={onBack} className="focus-ring mb-6 flex items-center gap-2 rounded-xl px-2 py-2 text-sm font-bold text-slate-500 transition hover:text-violet-600"><ArrowRight size={18} /> חזרה למילון</button>
       <div className="glass-dark relative overflow-hidden rounded-[2rem] p-6 text-white sm:p-9">
         <div className="absolute -left-16 -top-24 h-64 w-64 rounded-full bg-cyan-400/20 blur-3xl" />

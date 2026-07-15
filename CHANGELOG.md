@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented in this file. The format follows Keep a Changelog, and the project uses Semantic Versioning.
 
+## [1.1.2] - 2026-07-15
+
+### Fixed
+
+- Removed unnecessary trailing mobile scroll space by using dynamic viewport sizing and tighter content spacing.
+- Prevented horizontal decorative overflow from expanding the mobile page area.
+- Raised the centered new-term action above the footer credit and mobile safe area.
+- Moved transient status messages above the elevated action button.
+
 ## [1.1.1] - 2026-07-15
 
 ### Added

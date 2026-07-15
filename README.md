@@ -18,6 +18,7 @@ The application provides a searchable academic glossary, role-based editing, use
 - User-selectable dark mode persisted on the current device
 - Native sharing to WhatsApp, SMS, email, and other installed applications
 - Centered mobile-friendly action button for adding new glossary terms
+- Dynamic mobile viewport sizing without trailing empty scroll space
 - Local demo mode when Supabase environment variables are not configured
 - Accessible dialogs, keyboard focus states, reduced-motion support, and touch-friendly controls
 
@@ -95,6 +96,10 @@ Supported browsers display an install icon in the application header. It opens t
 ## Sharing the application
 
 The share icon in the application header opens the device's native share sheet with a preformatted plain-text invitation and production URL. The message is compatible with WhatsApp and standard SMS clients. Browsers without native sharing support copy the complete invitation to the clipboard.
+
+## Mobile viewport behavior
+
+The application uses dynamic viewport units, horizontal overflow clipping, safe-area insets, and reduced page-bottom spacing to avoid empty trailing scroll areas on Android and iOS. The centered new-term action remains above the footer credit and device navigation area.
 
 ## Database security
 
