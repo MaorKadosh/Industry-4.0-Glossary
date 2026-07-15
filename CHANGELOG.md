@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented in this file. The format follows Keep a Changelog, and the project uses Semantic Versioning.
 
+## [1.1.3] - 2026-07-15
+
+### Fixed
+
+- Routed Android installation attempts from Samsung Internet to Google Chrome to avoid the browser-generated WebAPK compatibility warning from Google Play Protect.
+- Added browser-specific Hebrew installation guidance and a direct Chrome handoff action.
+- Strengthened the Web App Manifest with a stable application ID, full scope, standard-purpose icons, orientation, categories, and explicit related-app behavior.
+- Updated service worker registration to use the full application scope and bypass stale script caching.
+
 ## [1.1.2] - 2026-07-15
 
 ### Fixed

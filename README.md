@@ -91,7 +91,9 @@ The application is designed to support immediate sign-in after registration. In 
 
 ## App installation and theme
 
-Supported browsers display an install icon in the application header. It opens the native installation prompt when available and otherwise shows platform-specific instructions for adding the application to the desktop or home screen. Dark mode can be selected from the adjacent moon or sun icon and is stored locally on the device.
+Supported browsers display an install icon in the application header. It opens the native installation prompt when available and otherwise shows platform-specific instructions for adding the application to the desktop or home screen. On Android, installation through Google Chrome is recommended. Samsung Internet users are redirected to Chrome to avoid the browser-generated WebAPK compatibility warning shown by Google Play Protect. Dark mode can be selected from the adjacent moon or sun icon and is stored locally on the device.
+
+The Web App Manifest defines a stable application ID and scope, standard-purpose 192 px and 512 px icons, portrait orientation, and explicit install preferences. The service worker is registered for the full application scope and refreshed without HTTP cache reuse.
 
 ## Sharing the application
 
