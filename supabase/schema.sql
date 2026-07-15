@@ -12,6 +12,7 @@ create table public.terms (
   id uuid primary key default gen_random_uuid(),
   term text not null unique check (char_length(term) between 2 and 120),
   definition text not null check (char_length(definition) between 20 and 1200),
+  lecture_id text,
   created_by uuid not null constraint terms_created_by_fkey references public.users(id),
   created_at timestamptz not null default now()
 );

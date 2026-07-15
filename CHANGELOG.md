@@ -2,6 +2,20 @@
 
 All notable changes to this project are documented in this file. The format follows Keep a Changelog, and the project uses Semantic Versioning.
 
+## [1.2.0] - 2026-07-15
+
+### Added
+
+- Required lecture categorization for term creation and editing using the twelve course lectures.
+- Device-local persistence of the last lecture selected when adding a term.
+- Lecture metadata on every glossary card, including a clear fallback for existing uncategorized terms.
+- Lecture-aware glossary search.
+- Incremental Supabase migration adding the nullable `terms.lecture_id` text column.
+
+### Changed
+
+- Replaced the main glossary tagline with the new information-age, logistics, and procurement course description.
+
 ## [1.1.4] - 2026-07-15
 
 ### Changed

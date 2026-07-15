@@ -10,9 +10,16 @@ export interface Term {
   id: string;
   term: string;
   definition: string;
+  lecture_id: string | null;
   created_by: string;
   created_at: string;
   creator?: Pick<Profile, "name"> | null;
+}
+
+export interface TermFormValues {
+  term: string;
+  definition: string;
+  lecture_id: string;
 }
 
 export interface AuditLog {
@@ -27,7 +34,7 @@ export interface Database {
   public: {
     Tables: {
       users: { Row: Profile; Insert: Profile; Update: Partial<Omit<Profile, "id">> };
-      terms: { Row: Term; Insert: Omit<Term, "id" | "created_at" | "creator">; Update: Partial<Pick<Term, "term" | "definition">> };
+      terms: { Row: Term; Insert: Omit<Term, "id" | "created_at" | "creator">; Update: Partial<Pick<Term, "term" | "definition" | "lecture_id">> };
       audit_logs: { Row: AuditLog; Insert: Omit<AuditLog, "id" | "timestamp" | "user">; Update: never };
     };
   };

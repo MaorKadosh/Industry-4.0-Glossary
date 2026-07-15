@@ -1,12 +1,19 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import { BookPlus, X } from "lucide-react";
-import type { Term } from "@/types/database";
+import { BookPlus, ChevronDown, X } from "lucide-react";
+import { isLectureId, lastLectureStorageKey, lectures } from "@/lib/lectures";
+import type { Term, TermFormValues } from "@/types/database";
 
-export function TermModal({ term, onClose, onSave }: { term?: Term | null; onClose: () => void; onSave: (values: { term: string; definition: string }) => Promise<void> }) {
+export function TermModal({ term, onClose, onSave }: { term?: Term | null; onClose: () => void; onSave: (values: TermFormValues) => Promise<void> }) {
   const [title, setTitle] = useState(term?.term ?? "");
   const [definition, setDefinition] = useState(term?.definition ?? "");
+  const [lectureId, setLectureId] = useState(() => {
+    if (term?.lecture_id) return term.lecture_id;
+    if (typeof window === "undefined") return "";
+    const savedLectureId = window.localStorage.getItem(lastLectureStorageKey);
+    return savedLectureId && isLectureId(savedLectureId) ? savedLectureId : "";
+  });
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -18,8 +25,12 @@ export function TermModal({ term, onClose, onSave }: { term?: Term | null; onClo
   async function submit(event: FormEvent) {
     event.preventDefault();
     setSaving(true);
-    await onSave({ term: title.trim(), definition: definition.trim() });
-    setSaving(false);
+    if (!term) window.localStorage.setItem(lastLectureStorageKey, lectureId);
+    try {
+      await onSave({ term: title.trim(), definition: definition.trim(), lecture_id: lectureId });
+    } finally {
+      setSaving(false);
+    }
   }
 
   return (
@@ -31,6 +42,7 @@ export function TermModal({ term, onClose, onSave }: { term?: Term | null; onClo
         </div>
         <form className="mt-7 space-y-5" onSubmit={submit}>
           <label className="block"><span className="mb-2 block text-sm font-bold">שם המושג</span><input autoFocus required maxLength={120} value={title} onChange={(event) => setTitle(event.target.value)} className="focus-ring h-13 w-full rounded-2xl border border-slate-200 px-4 outline-none transition focus:border-violet-400" placeholder="לדוגמה: תאום דיגיטלי" /></label>
+          <label className="block"><span className="mb-2 block text-sm font-bold">שיוך להרצאה</span><span className="relative block"><select required value={lectureId} onChange={(event) => setLectureId(event.target.value)} className="focus-ring h-13 w-full appearance-none rounded-2xl border border-slate-200 bg-white pe-4 ps-11 text-sm outline-none transition focus:border-violet-400"><option value="" disabled>בחירת הרצאה</option>{lectures.map((lecture) => <option key={lecture.id} value={lecture.id}>{lecture.label}</option>)}</select><ChevronDown className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} /></span><span className="mt-2 block text-xs leading-5 text-slate-400">הבחירה האחרונה תישמר עבור המושג הבא.</span></label>
           <label className="block"><span className="mb-2 block text-sm font-bold">הגדרה</span><textarea required minLength={20} maxLength={1200} rows={6} value={definition} onChange={(event) => setDefinition(event.target.value)} className="focus-ring w-full resize-none rounded-2xl border border-slate-200 p-4 leading-7 outline-none transition focus:border-violet-400" placeholder="הסבר בהיר, מדויק ושימושי למושג..." /></label>
           <div className="flex gap-3 pt-2"><button disabled={saving} className="focus-ring flex-1 rounded-2xl bg-violet-600 px-5 py-3.5 font-bold text-white shadow-lg shadow-violet-500/20 transition hover:-translate-y-0.5 hover:bg-violet-700 disabled:opacity-60">{saving ? "שומר..." : term ? "שמירת שינויים" : "הוספת המושג"}</button><button type="button" onClick={onClose} className="focus-ring rounded-2xl border border-slate-200 px-6 py-3.5 font-bold text-slate-600 transition hover:bg-slate-50">ביטול</button></div>
         </form>

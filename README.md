@@ -11,6 +11,8 @@ The application provides a searchable academic glossary, role-based editing, use
 - Viewer, Editor, and Admin roles enforced with PostgreSQL Row Level Security
 - Search and alphabetical or chronological sorting
 - Create, edit, and delete workflows for Editors and Admins
+- Required lecture categorization for new terms with the last submitted lecture remembered on the current device
+- Lecture labels displayed on glossary cards and included in glossary search
 - Admin-only user role management
 - Admin-only audit log with database-triggered events
 - Admin promotion and demotion through the protected administration interface
@@ -85,6 +87,15 @@ supabase/migrations/20260715_fix_role_audit.sql
 ```
 
 The migration preserves the authenticated Admin as the audit actor and provides a safe fallback for initial role bootstrapping from the SQL Editor.
+
+Projects created before version 1.2.0 must also run:
+
+```sql
+alter table public.terms
+add column if not exists lecture_id text;
+```
+
+The same command is available in `supabase/migrations/20260715_add_lecture_id.sql`. Existing terms remain valid with an empty lecture assignment and can be categorized later through the edit dialog.
 
 ## Email confirmation
 

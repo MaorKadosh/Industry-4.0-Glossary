@@ -10,14 +10,14 @@ export const demoUsers: Profile[] = [
 ];
 
 export const demoTerms: Term[] = [
-  { id: "1", term: "תעשייה 4.0", definition: "המהפכה התעשייתית הרביעית, המחברת מערכות פיזיות ודיגיטליות באמצעות נתונים, אוטומציה, קישוריות וקבלת החלטות חכמה.", created_by: "demo-admin", created_at: "2026-07-01T08:00:00Z", creator: { name: "Matan Suissa" } },
-  { id: "2", term: "מערכת ניהול מחסן", definition: "מערכת מידע המתכננת, מתזמנת ומבקרת קליטת סחורה, אחסון, ליקוט, אריזה ומשלוח במרכז לוגיסטי.", created_by: "demo-editor", created_at: "2026-07-02T08:00:00Z", creator: { name: "נועה לוי" } },
-  { id: "3", term: "מיקור חוץ לוגיסטי", definition: "העברת פעילויות לוגיסטיקה לספק מומחה המנהל אחסון, הפצה ושירותי קצה תוך אינטגרציה למערכות הארגון.", created_by: "demo-editor", created_at: "2026-07-03T08:00:00Z", creator: { name: "נועה לוי" } },
-  { id: "4", term: "ממשק אדם-מכונה", definition: "נקודת המפגש שבה עובדים מפעילים, מנטרים ומבקרים מערכות רובוטיות ואוטומטיות בסביבה תפעולית.", created_by: "demo-admin", created_at: "2026-07-04T08:00:00Z", creator: { name: "Matan Suissa" } },
-  { id: "5", term: "שרשרת אספקה רב־ערוצית", definition: "ניהול מתואם של מלאי, הזמנות ואספקה בין חנויות, מסחר מקוון, מוקדים לוגיסטיים וערוצי מסירה שונים.", created_by: "demo-viewer", created_at: "2026-07-05T08:00:00Z", creator: { name: "יואב כהן" } },
-  { id: "6", term: "שותפות ציבורית־פרטית", definition: "מודל ארוך טווח שבו גוף ציבורי וזכיין פרטי חולקים אחריות, סיכונים ומשאבים להקמה ולהפעלה של תשתית לוגיסטית.", created_by: "demo-admin", created_at: "2026-07-06T08:00:00Z", creator: { name: "Matan Suissa" } },
-  { id: "7", term: "תוכנה כשירות", definition: "מודל אספקת תוכנה בענן המאפשר לארגון להשתמש בפלטפורמה לפי מנוי, להתעדכן במהירות ולהתרחב ללא תשתית מקומית כבדה.", created_by: "demo-editor", created_at: "2026-07-07T08:00:00Z", creator: { name: "נועה לוי" } },
-  { id: "8", term: "נמל חכם", definition: "נמל המשלב חיישנים, אוטומציה, אנליטיקה ושיתוף נתונים כדי לקצר זמני שהייה, לשפר בטיחות ולייעל את זרימת המטענים.", created_by: "demo-editor", created_at: "2026-07-08T08:00:00Z", creator: { name: "נועה לוי" } },
+  { id: "1", lecture_id: "lecture-01", term: "תעשייה 4.0", definition: "המהפכה התעשייתית הרביעית, המחברת מערכות פיזיות ודיגיטליות באמצעות נתונים, אוטומציה, קישוריות וקבלת החלטות חכמה.", created_by: "demo-admin", created_at: "2026-07-01T08:00:00Z", creator: { name: "Matan Suissa" } },
+  { id: "2", lecture_id: "lecture-02", term: "מערכת ניהול מחסן", definition: "מערכת מידע המתכננת, מתזמנת ומבקרת קליטת סחורה, אחסון, ליקוט, אריזה ומשלוח במרכז לוגיסטי.", created_by: "demo-editor", created_at: "2026-07-02T08:00:00Z", creator: { name: "נועה לוי" } },
+  { id: "3", lecture_id: "lecture-04", term: "מיקור חוץ לוגיסטי", definition: "העברת פעילויות לוגיסטיקה לספק מומחה המנהל אחסון, הפצה ושירותי קצה תוך אינטגרציה למערכות הארגון.", created_by: "demo-editor", created_at: "2026-07-03T08:00:00Z", creator: { name: "נועה לוי" } },
+  { id: "4", lecture_id: "lecture-10", term: "ממשק אדם-מכונה", definition: "נקודת המפגש שבה עובדים מפעילים, מנטרים ומבקרים מערכות רובוטיות ואוטומטיות בסביבה תפעולית.", created_by: "demo-admin", created_at: "2026-07-04T08:00:00Z", creator: { name: "Matan Suissa" } },
+  { id: "5", lecture_id: "lecture-09", term: "שרשרת אספקה רב־ערוצית", definition: "ניהול מתואם של מלאי, הזמנות ואספקה בין חנויות, מסחר מקוון, מוקדים לוגיסטיים וערוצי מסירה שונים.", created_by: "demo-viewer", created_at: "2026-07-05T08:00:00Z", creator: { name: "יואב כהן" } },
+  { id: "6", lecture_id: "lecture-08", term: "שותפות ציבורית־פרטית", definition: "מודל ארוך טווח שבו גוף ציבורי וזכיין פרטי חולקים אחריות, סיכונים ומשאבים להקמה ולהפעלה של תשתית לוגיסטית.", created_by: "demo-admin", created_at: "2026-07-06T08:00:00Z", creator: { name: "Matan Suissa" } },
+  { id: "7", lecture_id: "lecture-05", term: "תוכנה כשירות", definition: "מודל אספקת תוכנה בענן המאפשר לארגון להשתמש בפלטפורמה לפי מנוי, להתעדכן במהירות ולהתרחב ללא תשתית מקומית כבדה.", created_by: "demo-editor", created_at: "2026-07-07T08:00:00Z", creator: { name: "נועה לוי" } },
+  { id: "8", lecture_id: "lecture-11", term: "נמל חכם", definition: "נמל המשלב חיישנים, אוטומציה, אנליטיקה ושיתוף נתונים כדי לקצר זמני שהייה, לשפר בטיחות ולייעל את זרימת המטענים.", created_by: "demo-editor", created_at: "2026-07-08T08:00:00Z", creator: { name: "נועה לוי" } },
 ];
 
 export const demoLogs: AuditLog[] = [
