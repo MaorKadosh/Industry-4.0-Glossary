@@ -9,10 +9,10 @@ The application provides a searchable academic glossary, role-based editing, use
 - Fully responsive RTL interface optimized for Android and iOS browsers
 - Email and password authentication through Supabase Auth
 - Viewer, Editor, and Admin roles enforced with PostgreSQL Row Level Security
-- Search and alphabetical or chronological sorting
+- Text search, lecture filtering, and alphabetical or chronological sorting
 - Create, edit, and delete workflows for Editors and Admins
 - Required lecture categorization for new terms with the last submitted lecture remembered on the current device
-- Lecture labels displayed on glossary cards and included in glossary search
+- Distinct color-coded lecture labels displayed on glossary cards and included in glossary search
 - Admin-only user role management
 - Admin-only audit log with database-triggered events
 - Admin promotion and demotion through the protected administration interface
@@ -76,7 +76,7 @@ After the first Admin signs in, additional administrators can be assigned from t
 | Editor | Yes | Yes | Yes | Yes | No | No |
 | Admin | Yes | Yes | Yes | Yes | Yes | Yes |
 
-New accounts receive the Viewer role. An Admin can assign Viewer, Editor, or Admin access from the administration dashboard. The currently signed-in Admin cannot demote their own account in the UI, ensuring that at least one accessible administrator remains.
+New accounts automatically receive the Viewer role and can read the glossary immediately after registration. Editing remains unavailable until an Admin explicitly assigns the Editor or Admin role from the administration dashboard. The currently signed-in Admin cannot demote their own account in the UI, ensuring that at least one accessible administrator remains.
 
 ## Existing database migration
 

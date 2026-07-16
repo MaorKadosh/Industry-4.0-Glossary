@@ -42,7 +42,7 @@ export function LoginPanel() {
       setMessage("לא הצלחנו להשלים את הפעולה. כדאי לבדוק את הפרטים ולנסות שוב.");
       return;
     }
-    if (mode === "register") setMessage("ההרשמה הושלמה בהצלחה. אפשר להתחיל להשתמש במערכת.");
+    if (mode === "register") setMessage("ההרשמה הושלמה בהצלחה. אפשר לצפות במושגים, והרשאת עריכה תינתן באישור מנהל המערכת.");
   }
 
   return (
@@ -71,7 +71,7 @@ export function LoginPanel() {
           </div>
           <p className="text-sm font-bold text-violet-600">{mode === "login" ? "טוב לראות אותך שוב" : "מצטרפים למרחב הלמידה"}</p>
           <h2 className="mt-2 text-3xl font-black tracking-tight">{mode === "login" ? "כניסה לחשבון" : "יצירת חשבון"}</h2>
-          <p className="mt-3 text-slate-500">{mode === "login" ? "הזינו את הפרטים כדי להמשיך למילון." : "לאחר ההרשמה מנהל המערכת יקבע את ההרשאה."}</p>
+          <p className="mt-3 text-slate-500">{mode === "login" ? "הזינו את הפרטים כדי להמשיך למילון." : "מיד לאחר ההרשמה ניתן לצפות במושגים. הרשאת עריכה ניתנת באישור מנהל המערכת."}</p>
 
           <form className="mt-9 space-y-5" onSubmit={submit}>
             {mode === "register" && <Field icon={<UserRound size={19} />} label="שם מלא"><input required value={name} onChange={(event) => setName(event.target.value)} className="w-full bg-transparent outline-none" placeholder="השם שיוצג במערכת" /></Field>}

@@ -2,6 +2,19 @@
 
 All notable changes to this project are documented in this file. The format follows Keep a Changelog, and the project uses Semantic Versioning.
 
+## [1.3.0] - 2026-07-16
+
+### Added
+
+- Dedicated lecture filter alongside text search and sorting controls.
+- Twelve distinct visual color treatments for lecture labels.
+- Clear registration messaging that Viewer access is immediate while editing requires Admin approval.
+
+### Changed
+
+- Replaced the generic professional-term label with the associated lecture label on every glossary card.
+- Updated the application footer with the full course and creator credit.
+
 ## [1.2.1] - 2026-07-16
 
 ### Changed
