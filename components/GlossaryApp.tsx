@@ -145,7 +145,7 @@ function Header({ profile, theme, onToggleTheme, mobileMenu, setMobileMenu, acti
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <button onClick={() => setActiveView("glossary")} className="focus-ring flex items-center gap-3 rounded-xl text-right">
           <Image src="/icons/logo-192.png" alt="" width={44} height={44} className="h-11 w-11 rounded-2xl object-cover shadow-lg shadow-cyan-500/20" priority />
-          <span><strong className="block leading-none">מילון 4.0</strong><small className="mt-1 block text-[10px] font-semibold text-slate-400">שרשרת אספקה חכמה</small></span>
+          <span className="min-w-0"><strong className="block leading-none">מילון 4.0</strong><small className="mt-1 block max-w-[6.25rem] text-[9px] font-semibold leading-[0.7rem] text-slate-400 sm:max-w-none sm:whitespace-nowrap sm:text-[10px]">מתוך הרצאות מנהלים ויזמים בתעשייה 2026</small></span>
         </button>
         <div className="flex items-center gap-1">
           <nav className="hidden items-center gap-2 sm:flex">

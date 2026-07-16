@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file. The format follows Keep a Changelog, and the project uses Semantic Versioning.
 
+## [1.2.1] - 2026-07-16
+
+### Changed
+
+- Updated the application header subtitle to identify the 2026 managers and entrepreneurs lecture series.
+- Added responsive wrapping and sizing for the longer header subtitle on mobile screens.
+
 ## [1.2.0] - 2026-07-15
 
 ### Added
